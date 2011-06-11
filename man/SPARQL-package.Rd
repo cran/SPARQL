@@ -11,7 +11,7 @@ Load SPARQL SELECT query result tables from an end-point as data frame.
 \tabular{ll}{
 Package: \tab SPARQL\cr
 Type: \tab Package\cr
-Version: \tab 1.0\cr
+Version: \tab 1.1\cr
 Date: \tab 2011-05-05\cr
 License: \tab GPL-3\cr
 Depends: \tab XML\cr
@@ -19,8 +19,8 @@ LazyLoad: \tab yes\cr
 }
 }
 \author{
-Willem Robert van Hage\cr
-Maintainer: Willem Robert van Hage <W.R.van.Hage@vu.nl>
+Willem Robert van Hage and Tomi Kauppinen\cr
+Maintainer: Willem Robert van Hage <W.R.van.Hage@vu.nl> and Tomi Kauppinen <tomi.kauppinen@uni-muenster.de>
 }
 \references{
 SPARQL specification, \url{http://www.w3.org/TR/rdf-sparql-query/}.\cr

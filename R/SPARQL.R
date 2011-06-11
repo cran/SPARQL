@@ -1,4 +1,5 @@
 library(XML)
+library(RCurl)
 
 #
 # Read SPARQL results from end-point
@@ -6,7 +7,7 @@ library(XML)
 
 SPARQL <- function(url="http://localhost/",query="",ns=NULL,param="query",extra="") {
 	tf <- tempfile()
-	download.file(paste(url,'?',param,'=',URLencode(query),extra,sep=""),tf,quiet=TRUE)
+        tf <- getURL(paste(url,'?',param,'=',URLencode(query),extra,sep=""), httpheader = c(Accept="application/sparql-results+xml"))
 	DOM <- xmlParse(tf)
 	attrs <- unlist(xpathApply(DOM,
 		paste('//s:head/s:variable',sep=""),

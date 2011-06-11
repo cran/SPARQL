@@ -32,7 +32,7 @@ SPARQL(url = "http://localhost/", query = "", ns = NULL, param = "query", extra 
 }
   \item{extra}{
 %%     ~~Describe \code{extra} here~~
-  Extra characters appended to the HTTP request URL. Some SPARQL end-points require extra parameters to work. These can be supplied, in URL encoded form, as a character vector with this parameter.
+  Extra characters appended to the HTTP request URL. Some SPARQL end-points require extra parameters to work. These can be supplied, in URL encoded form, as a character vector with this parameter. The SPARQL package makes an explicit request for "sparql-results+xml" from the endpoint.
 }
 }
 %%\details{
@@ -52,7 +52,7 @@ Examples of SPARQL end-points, \url{http://www.w3.org/wiki/SparqlEndpoints}.
 %% ~put references to the literature/web site here ~
 }
 \author{
-Willem Robert van Hage
+Willem Robert van Hage and Tomi Kauppinen
 }
 %%\note{
 %%  ~~further notes~~

@@ -11,7 +11,7 @@ Load SPARQL SELECT query result tables from an end-point as data frame.
 \tabular{ll}{
 Package: \tab SPARQL\cr
 Type: \tab Package\cr
-Version: \tab 1.2\cr
+Version: \tab 1.5\cr
 Date: \tab 2011-07-08\cr
 License: \tab GPL-3\cr
 Depends: \tab XML\cr
@@ -30,7 +30,7 @@ Examples of SPARQL end-points, \url{http://www.w3.org/wiki/SparqlEndpoints}.
 \examples{
 d <- SPARQL(url="http://services.data.gov.uk/reference/sparql",
             query="SELECT * WHERE { ?s ?p ?o . } LIMIT 10",
-            ns=c('time','http://www.w3.org/2006/time#'))
+            ns=c('time','<http://www.w3.org/2006/time#>'))
 
 is.data.frame(d)
 }

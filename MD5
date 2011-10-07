@@ -1,0 +1,13 @@
+bb454d5c8ea7486a5d28e7467368fb59 *DESCRIPTION
+e18fe8c38aa6f1a73188e45b60013b5f *R/SPARQL.R
+4a923c60694cb00efe76baf463c06e9c *man/SPARQL-package.Rd
+ac356135d66b4405cd73acff8e04fbab *man/SPARQL.Rd
+4054982ed7ee8e506dfb417eda95699d *man/commonns.Rd
+18636eccc11a72540891606f06e4df60 *man/get_attr.Rd
+15c7073db9a9896bc14878f9198ee30a *man/noBrackets.Rd
+6ed17d1489d7c9c6f8ddf6994ecb8da5 *man/qnames.Rd
+cfb6ce1fdbaa1f98be98a08a76929c3c *man/readCSVstring.Rd
+a136ccc1a2b9506a9e837f263b924af8 *man/readTSVstring.Rd
+e154f7e4f732dc20e49bb82be3bfa85b *man/sparqlns.Rd
+3f14648bfb5d6b619b63fe53b477e61e *man/sparqltest.Rd
+3cf4d4b08ea204796ba1a9288d6ef52c *man/substNS.Rd

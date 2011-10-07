@@ -8,7 +8,7 @@ SPARQL client
 This function connects to a SPARQL end-point over HTTP, poses a SELECT query, and return the results as a data frame with a named column for each variable from the SELECT query.
 }
 \usage{
-SPARQL(url = "http://localhost/", query = "", ns = NULL, param = "query", extra = "")
+SPARQL(url = "http://localhost/", query = "", ns = NULL, param = "query", extra = "", format="xml", lossy=TRUE)
 }
 %%- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -23,8 +23,8 @@ SPARQL(url = "http://localhost/", query = "", ns = NULL, param = "query", extra 
   \item{ns}{
 %%     ~~Describe \code{ns} here~~
   Prefixes to shorten IRIs returned by the SPARQL end-point.
-  For example, \preformatted{ns=c('dc','http://purl.org/dc/elements/1.1/',
-     'rdfs','http://www.w3.org/2000/01/rdf-schema#')} will shorten the IRIs \code{'http://purl.org/dc/elements/1.1/title'} to \code{'dc:title'} and \code{'http://www.w3.org/2000/01/rdf-schema#label'} to \code{'rdfs:label'}. 
+  For example, \preformatted{ns=c('dc','<http://purl.org/dc/elements/1.1/>',
+     'rdfs','<http://www.w3.org/2000/01/rdf-schema#>')} will shorten the IRIs \code{'http://purl.org/dc/elements/1.1/title'} to \code{'dc:title'} and \code{'http://www.w3.org/2000/01/rdf-schema#label'} to \code{'rdfs:label'}. 
 }
   \item{param}{
 %%     ~~Describe \code{param} here~~
@@ -32,7 +32,13 @@ SPARQL(url = "http://localhost/", query = "", ns = NULL, param = "query", extra 
 }
   \item{extra}{
 %%     ~~Describe \code{extra} here~~
-  Extra characters appended to the HTTP request URL. Some SPARQL end-points require extra parameters to work. These can be supplied, in URL encoded form, as a character vector with this parameter. The SPARQL package makes an explicit request for "sparql-results+xml" from the endpoint.
+  Extra characters appended to the HTTP request URL. Some SPARQL end-points require extra parameters to work. These can be supplied, in URL encoded form, as a character vector with this parameter. This field can be used to specify the various ways in which different end-points can be told to return a certain format. For example, extra="&resultFormat=xml" or extra="&output=xml"
+}
+  \item{format}{
+ Can be used to explicitly state what kind of format is returned by the output. This version supports "xml", "csv" and "tsv".
+}
+  \item{lossy}{
+  The SPARQL client contains two parsers for SPARQL XML results, a fast lossy parser and a slow non-lossy parser. The lossy parser ignores literal datatypes and languages and does not wrap URIs with pointy braces. The lossy parameter can be set to FALSE to select the slow non-lossy XML parser when the format parameter is set to "xml" (which is the case by default). NB, Most SPARQL end-points that support CSV or TSV output are also lossy.
 }
 }
 %%\details{
@@ -66,7 +72,7 @@ Willem Robert van Hage and Tomi Kauppinen
 \examples{
 d <- SPARQL(url="http://services.data.gov.uk/reference/sparql",
             query="SELECT * WHERE { ?s ?p ?o . } LIMIT 10",
-            ns=c('time','http://www.w3.org/2006/time#'))
+            ns=c('time','<http://www.w3.org/2006/time#>'))
 
 is.data.frame(d)
 }

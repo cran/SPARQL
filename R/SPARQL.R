@@ -58,7 +58,12 @@ SPARQL <- function(url="http://localhost/", query="", update="",
                                    quote(xmlGetAttr(x, "name"))))			
         ns2 <- noBrackets(ns)
         res <- get_attr(attrs, DOM, ns2)
-        df <- data.frame(res)
+        if(dim(res)[[1]] == 1 & dim(res)[[2]] > 1) {
+          df <- data.frame(unlist(res))
+          names(df) <- attrs[1]
+        } else { 
+          df <- data.frame(res)
+        }
         rm(res)
         rm(DOM)
         
@@ -73,9 +78,13 @@ SPARQL <- function(url="http://localhost/", query="", update="",
     } else if (format == 'csv') {
       tf <- getURL(paste(url, '?', param, '=', URLencode(query), extrastr, sep=""))
       df <- readCSVstring(tf, blank.lines.skip=TRUE, strip.white=TRUE)
+      if (!is.null(ns)) 
+        df <- dropNS(df,ns)
     } else if (format == 'tsv') {
       tf <- getURL(paste(url, '?', param, '=', URLencode(query), extrastr, sep=""))
       df <- readTSVstring(tf, blank.lines.skip=TRUE, strip.white=TRUE)
+      if (!is.null(ns)) 
+        df <- dropNS(df,ns)
     }
     list(results=df, namespaces=ns)
   } else if (update != "") {
@@ -219,4 +228,18 @@ interpret_type <- function(type, literal,ns) {
     as.POSIXct(literal,format="--%m")
   else
     paste('"', literal, '"^^', type_uri, sep="")
+}
+
+dropNS <- function(df,ns) {
+  data.frame(lapply(df, 
+                    function(c) {
+                      if(is.factor(c)) {
+                        c <- as.character(c)
+                        c <- qnames(c,ns)
+                        return(as.factor(c))
+                      }
+                      if (is.character(c))
+                        return(qnames(c,ns))
+                      return(c)
+                      } ))
 }
